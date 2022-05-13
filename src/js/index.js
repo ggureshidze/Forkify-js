@@ -3,6 +3,7 @@
 
 
 
+import Recipe from "./models/recipe";
 import Search from "./models/search";
 import { clearLoader, elements, renderLoader } from "./view/base";
 import * as searchView from "./view/searchView";
@@ -45,6 +46,19 @@ elements.searchForm.addEventListener('submit', (e) => {
 })
 
 
+// Recipe 
+
+const controlRecipe = async () => {
+    const id = window.location.hash.replace("#", '');
+
+    if(id){
+        state.recipe = new Recipe(id);
+
+        await state.recipe.getRecipe();
+    }
+}
+
+
 elements.searchResPages.addEventListener('click', e => {
     const btn = e.target.closest('.btn-inline');
 
@@ -55,4 +69,9 @@ elements.searchResPages.addEventListener('click', e => {
         searchView.renderResult(state.search.result, goToPage)
     }
 
+});
+
+
+window.addEventListener('hashchange', () => {
+    controlRecipe();
 });
