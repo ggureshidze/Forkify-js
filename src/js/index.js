@@ -67,10 +67,17 @@ const controlRecipe = async () => {
         state.recipe = new Recipe(id);
 
         try {
+
+
+            
+
+
             await state.recipe.getRecipe();
         } catch (error) {
             alert('Recipe Error')
         }
+
+        state.recipe.parseIngredients();
 
         
         clearLoader();

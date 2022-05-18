@@ -30,4 +30,56 @@ export default class Recipe {
 
     }
 
+    parseIngredients(){
+        const newIngredients = this.ingredients.map(el => {
+            
+            
+            const unitsLong = ['tablespoons', 'tablespoon', 'ounces',  'ounce', 'teaspoons', 'teaspoon', 'cups'];
+            const unitsShort = ['tbsp', 'tbsp', 'oz', 'oz', 'tsp', 'tsp', 'cup'];
+            const units = [...unitsShort, 'g', 'kg', 'pound'];
+
+        //1) iniform munits 
+            let ingredient = el.toLowerCase();
+            unitsLong.forEach((unit, index) => {
+                ingredient = ingredient.replace(unit,unitsShort[index])
+
+
+                
+            })
+
+            // 2) remove paranethenses
+
+            ingredient = ingredient.replace(/ *\(([^)]*)\) */g, ' ');
+
+            //convert string object
+            const ingArr = ingredient.split(' ');
+            const unitIndex = ingArr.findIndex(word => units.includes(word));
+
+
+            let objIng;
+
+            if(unitIndex > -1){
+                constarrCount =arrIng;
+
+
+                
+            }
+
+
+
+
+            return objIng;
+
+       
+        })
+
+        this.ingredients = newIngredients;
+
+
+        
+
+
+
+    }
+
 }
