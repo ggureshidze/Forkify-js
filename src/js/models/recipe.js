@@ -54,15 +54,37 @@ export default class Recipe {
             //convert string object
             const ingArr = ingredient.split(' ');
             const unitIndex = ingArr.findIndex(word => units.includes(word));
-
+          
 
             let objIng;
 
             if(unitIndex > -1){
-                constarrCount =arrIng;
+                const arrCount = ingArr.slice(0,unitIndex);
+
+
+                let count;
+                if(arrCount.length === 1){
+                    count = eval(ingArr[0]);
+                }else{
+                    count = eval(arrCount.join('+'))
+                }
+
+                objIng = {
+                    count,
+                    unit:ingArr[unitIndex],
+                    ingredient: ingArr.slice(unitIndex + 1).join(' ')
+
+                }
 
 
                 
+            }else if(parseInt(ingArr[0],10)){
+                objIng = {
+                    count: parseInt(ingArr[0],10),
+                    unit: '',
+                    ingredient: ingArr.slice(1).join(' ')
+
+                }
             }
 
 
